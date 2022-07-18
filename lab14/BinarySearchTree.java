@@ -13,12 +13,24 @@ public class BinarySearchTree<T extends Comparable<T>> extends BinaryTree<T> {
     /* Returns true if the BST contains the given KEY. */
     public boolean contains(T key) {
         // TODO: YOUR CODE HERE
-        return false;
+        if(root == null) {
+            return false;
+        }
+        return containsHelper(root, key);
     }
 
     /* Adds a node for KEY iff KEY isn't in the BST already. */
     public void add(T key) {
         // TODO: YOUR CODE HERE
+        if(root == null) {
+            root = new TreeNode(key);
+        }
+
+        if(contains(key)) {
+            return;
+        }
+
+        addHelper(null, root, key);
     }
 
     /* Deletes a node from the BST. 
@@ -84,4 +96,35 @@ public class BinarySearchTree<T extends Comparable<T>> extends BinaryTree<T> {
         }
         return delNode.item;
     }
+    private boolean containsHelper(TreeNode curr, T key) {
+        if(curr == null) {
+            return false;
+        }
+
+        if (curr.item.compareTo(key) < 0) {
+            containsHelper(curr.left, key);
+            } else if (curr.item.compareTo(key) > 0) {
+            containsHelper(curr.right, key);
+        } else {
+            return true;
+        }
+
+        return false;
+    }
+    public void addHelper(TreeNode pre, TreeNode curr, T key) {
+        if(curr == null) {
+            curr = new TreeNode(key);
+            if(pre.item.compareTo(key) > 0) {
+                pre.left = curr;
+            } else if(pre.item.compareTo(key) < 0) {
+                pre.right = curr;
+            }
+        }
+        if(curr.item.compareTo(key) > 0) {
+            addHelper(curr, curr.left, key);
+        } else if(curr.item.compareTo(key) < 0) {
+            addHelper(curr, curr.right, key);
+        }
+    }
+
 }
