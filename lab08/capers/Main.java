@@ -44,6 +44,7 @@ public class Main {
         if (args.length == 0) {
             exitWithError("Must have at least one argument");
         }
+
         setupPersistence();
         switch (args[0]) {
             case "story":
@@ -132,5 +133,8 @@ public class Main {
             throw new RuntimeException(
                 String.format("Invalid number of arguments for: %s.", cmd));
         }
+    }
+
+    private static class Arrays {
     }
 }

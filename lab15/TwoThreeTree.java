@@ -45,11 +45,11 @@ public class TwoThreeTree<T extends Comparable<T>> {
         public void setChildAt(int i, Node<T> node) {
             if (i < 0 || i >= children.length) {
                 throw new IllegalArgumentException(
-                    "Child index out of bounds: " + i);
+                        "Child index out of bounds: " + i);
             }
             if (!(node instanceof TwoThreeNode)) {
                 throw new IllegalArgumentException(
-                    "Children of 2-3 node must be a 2-3 node.");
+                        "Children of 2-3 node must be a 2-3 node.");
             }
             children[i] = node;
         }

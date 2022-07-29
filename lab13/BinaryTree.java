@@ -17,14 +17,14 @@ public class BinaryTree<T> {
     /* Returns the height of the tree. */
     public int height() {
         // TODO: YOUR CODE HERE
-        return 0;
+        return root.heightHelper(root);
     }
 
     /* Returns true if the tree's left and right children are the same height
        and are themselves completely balanced. */
     public boolean isCompletelyBalanced() {
         // TODO: YOUR CODE HERE
-        return false;
+        return root.isComplletelyBalancedHelper(root);
     }
 
     /* Returns a BinaryTree representing the Fibonacci calculation for N. */
@@ -173,5 +173,27 @@ public class BinaryTree<T> {
         }
 
         // TODO: ADD HELPER METHODS HERE
+        private int heightHelper(TreeNode<T> root) {
+            if(root == null) {
+                return 0;
+            }
+            int leftHeight = heightHelper(root.getLeft());
+            int rightHeight = heightHelper(root.getRight());
+            return Math.max(leftHeight, rightHeight) + 1;
+        }
+        private boolean isComplletelyBalancedHelper(TreeNode<T> root) {
+            if(root == null) {
+                return true;
+            }
+            boolean left = isComplletelyBalancedHelper(root.getLeft());
+            boolean right = isComplletelyBalancedHelper(root.getRight());
+
+            int leftHeight = heightHelper(root.getLeft());
+            int rightHeight = heightHelper(root.getRight());
+            if(leftHeight != rightHeight) {
+                return false;
+            }
+            return left && right;
+        }
     }
 }
